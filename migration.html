@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>We’re moving — Jaxon Fella</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Quicksand', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            green: '#4a5d4e',
+                            peach: '#e8b4a0',
+                            gold: '#d4a35d',
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="min-h-screen font-sans antialiased text-gray-900 bg-stone-200/80" style="background-image: radial-gradient(circle at 20% 30%, rgba(232, 180, 160, 0.15) 0%, transparent 45%), radial-gradient(circle at 80% 70%, rgba(74, 93, 78, 0.08) 0%, transparent 40%);">
+    <!--
+      Static migration page (from resources/views/store-migration.blade.php).
+      Edit MIGRATION_CONFIG before deploy. For Netlify, publish this file plus
+      the banner image at imageUrl (e.g. copy public/images/jaxonfella-is-now-ethanandjaxon.jpg
+      into the same folder structure relative to this HTML).
+    -->
+    <script>
+        window.MIGRATION_CONFIG = {
+            redirectUrl: 'https://www.ethanandjaxon.com',
+            redirectSeconds: 30,
+            imageUrl: 'images/jaxonfella-is-now-ethanandjaxon.jpg',
+        };
+    </script>
+
+    <main class="min-h-screen flex items-center justify-center px-4 py-10 sm:py-14">
+        <div class="relative w-full max-w-2xl rounded-2xl bg-white shadow-xl ring-1 ring-black/5 px-6 py-8 sm:px-10 sm:py-10">
+            <div class="mb-6 sm:mb-8">
+                <img
+                    id="migration-hero"
+                    src="images/jaxonfella-is-now-ethanandjaxon.jpg"
+                    alt="Jaxon Fella is now Ethan and Jaxon wonderwear"
+                    class="w-full h-auto rounded-lg"
+                    width="1200"
+                    height="400"
+                >
+            </div>
+
+            <h1 class="text-center text-lg sm:text-xl font-bold tracking-wide text-gray-900 uppercase mb-4">
+                Announcing our new chapter!
+            </h1>
+
+            <div class="space-y-4 text-center text-gray-700 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                <p>
+                    We are thrilled to share that our custom children’s clothing brand, <strong>Jaxon Fella</strong>,
+                    has officially rebranded. Discover our continued commitment to wonder under the new name:
+                    <strong class="text-brand-green">Ethan &amp; Jaxon wonderwear</strong>.
+                </p>
+                <p class="text-gray-600">
+                    <strong>Registered users</strong> will have their orders transferred for visibility on the new site.
+                </p>
+            </div>
+
+            <div class="mt-8 flex flex-col items-center gap-3">
+                <p
+                    id="countdown-label"
+                    class="w-full max-w-md rounded-xl bg-brand-peach/90 px-5 py-3.5 text-center text-sm sm:text-base font-semibold text-white uppercase tracking-wide shadow-sm"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Redirecting you in <span id="countdown-seconds"></span> seconds
+                </p>
+                <a
+                    id="migration-cta"
+                    href="#"
+                    class="text-sm font-medium text-brand-green underline decoration-brand-gold/60 underline-offset-2 hover:text-brand-green/80"
+                >
+                    Go to the new site now
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var cfg = window.MIGRATION_CONFIG || {};
+            var url = typeof cfg.redirectUrl === 'string' ? cfg.redirectUrl : 'https://www.ethanandjaxon.com';
+            var remaining = parseInt(cfg.redirectSeconds, 10);
+            if (isNaN(remaining) || remaining < 0) remaining = 30;
+
+            var hero = document.getElementById('migration-hero');
+            if (hero && cfg.imageUrl) hero.src = cfg.imageUrl;
+
+            var cta = document.getElementById('migration-cta');
+            if (cta) cta.href = url;
+
+            var el = document.getElementById('countdown-seconds');
+            if (el) el.textContent = String(remaining);
+
+            if (remaining <= 0) {
+                window.location.href = url;
+                return;
+            }
+            var t = setInterval(function () {
+                remaining -= 1;
+                if (el) el.textContent = String(remaining);
+                if (remaining <= 0) {
+                    clearInterval(t);
+                    window.location.href = url;
+                }
+            }, 1000);
+        })();
+    </script>
+</body>
+</html>
